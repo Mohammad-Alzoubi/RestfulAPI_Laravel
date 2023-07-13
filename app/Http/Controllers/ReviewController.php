@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Review\ReviewResource;
+use App\Models\Product;
 use App\Models\Review;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
@@ -11,9 +13,11 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Product $product)
     {
-        //
+        $reviews = $product->reviews;
+        return ReviewResource::collection($reviews);
+//        return $product->id;
     }
 
     /**
